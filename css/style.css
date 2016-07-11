@@ -1,8 +1,8 @@
 /*
-	Template Name:  
+	Template Name:
 	Author: Themeturn
 	Author URI:
-	Description: 
+	Description:
 	Version: 1.0
 */
 
@@ -101,7 +101,7 @@ a:focus{
 
 body, p{
 	font-family: 'Exo', sans-serif;
-	font-weight: 400; 
+	font-weight: 400;
 	font-size: 14px;
 	line-height: 20px;
 }
@@ -179,11 +179,11 @@ h5{
 =======================================*/
 #header{
 	max-width: 100%;
-	
+
 }
 
 .wrapper-inner{
-	margin: 220px 0px 270px;
+	margin: 390px 0px 270px;
 }
 .wrapper{
 	height: auto !important;
@@ -242,7 +242,7 @@ p.time-text{
 	left: 0px;
 	top: 0px;
 }
-.countdown_section:first-child:after {	
+.countdown_section:first-child:after {
 	background: transparent;
 }
 .countdown_amount {
@@ -391,6 +391,6 @@ p.time-text{
    text-transform: uppercase;
 }
 
-:-ms-input-placeholder {  
+:-ms-input-placeholder {
    text-transform: uppercase;
 }
