@@ -36,13 +36,11 @@ jQuery(function($) {
     Bactstretch js
 =============================================== */
       $.backstretch([
-          "images/bx-slider/bg2.jpg",
-          "images/bx-slider/bg1.jpg",
-          "images/bx-slider/bg3.jpg"
+          "images/bx-slider/Red-Truck.jpg"
         ], {
             fade: 750,
             duration: 4000
-        });   
+        });
 
 
 
