@@ -1,0 +1,49 @@
+
+/* Main Photo */
+.photo-01 {
+  background: url("../../images/layouts/samuel/userpics/rjk-cartoon-bw.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 360px;
+}
+
+/* Timeline */
+.timeline-samuel-01,
+.timeline-samuel-02,
+.timeline-samuel-03,
+.timeline-samuel-04 {
+  -moz-transition: all .5s ease-in-out;
+  -webkit-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+}
+.timeline-samuel-01 {
+  background: url("../../images/layouts/samuel/timeline/iwk-health-centre-web.jpg");
+  background-position: center;
+  background-size: cover;
+}
+.timeline-samuel-02 {
+  background: url("../../images/layouts/samuel/timeline/bl-web.jpg");
+  background-position: center;
+  background-size: cover;
+}
+.timeline-samuel-03 {
+  background: url("../../images/layouts/samuel/timeline/blackberry-web.jpg");
+  background-position: center;
+  background-size: cover;
+}
+.timeline-samuel-04 {
+  background: url("../../images/layouts/samuel/timeline/nb-web.jpg");
+  background-position: center;
+  background-size: cover;
+}
+.timeline-samuel-05 {
+  background: url("../../images/layouts/samuel/timeline/uhm-web.jpg");
+  background-position: center;
+  background-size: cover;
+}
+.timeline-samuel-06 {
+  background: url("../../images/layouts/samuel/timeline/smu-web.jpg");
+  background-position: center;
+  background-size: cover;
+}
