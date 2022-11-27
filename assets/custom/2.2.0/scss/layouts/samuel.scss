@@ -1,4 +1,3 @@
-
 /* Main Photo */
 .photo-01 {
   background: url("../../images/layouts/samuel/userpics/rjk-cartoon-bw.jpg");
@@ -17,10 +16,15 @@
   -webkit-transition: all .5s ease-in-out;
   transition: all .5s ease-in-out;
 }
-.timeline-samuel-01 {
-  background: url("../../images/layouts/samuel/timeline/iwk-health-centre-web.jpg");
+.timeline-samuel-00 {
+  background: url("../../images/layouts/samuel/timeline/NSH-logo-colour.jpg");
   background-position: center;
-  background-size: cover;
+  background-size: cover; 
+}
+.timeline-samuel-01 {
+  background: url("../../images/layouts/samuel/timeline/IWK-Logo-Colour.jpeg");
+  background-position: center;
+  background-size: cover; 
 }
 .timeline-samuel-02 {
   background: url("../../images/layouts/samuel/timeline/bl-web.jpg");
