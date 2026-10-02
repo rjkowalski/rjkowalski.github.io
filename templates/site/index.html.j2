@@ -1,0 +1,118 @@
+{% extends "site/_base.html.j2" %}
+{% from "site/_macros.html.j2" import anim %}
+{% block title %}Home{% endblock %}
+{% block description %}Personal homepage of {{ r.basics.name }}: {{ r.headline }}.{% endblock %}
+{% block extra_meta %}
+   <meta name="robots" content="all" />
+   <meta name="googlebot" content="all" />
+   <meta name="google" content="nositelinkssearchbox" />
+{% endblock %}
+{% block content %}
+
+   <section class="container-fluid" data-section="home">
+      <div class="row flex-row">
+
+         <!-- Personal Statement -->
+         <div id="details" class="col-md-8 flex-column bg-color01 light nopadding" {{ anim("left", 200) }}>
+            <div class="padding-50 flex-panel">
+               <div class="row row-no-padding">
+                  <div class="col-md-12 nopadding">
+                     <h3 class="font-accident-two-normal uppercase title">Personal Statement</h3>
+                     <div class="quote">
+                        <h5 class="font-accident-two-medium uppercase subtitle"><a href="about.html">{{ r.summary }}</a></h5>
+                        <div class="dividewhite3"></div>
+                     </div>
+                  </div>
+               </div>
+               <div class="divider-dynamic"></div>
+               <div class="row nopadding">
+{% for blk in w.home.infoblocks %}
+                  <div class="col-md-4 infoblock nopadding" {{ anim("bottom", 300 + 100 * loop.index0, "30px") }}>
+                     <div class="row">
+                        <div class="col-xs-12 col-sm-1 col-md-3"><i class="fa {{ blk.icon }} color-blue" aria-hidden="true"></i><div class="dividewhite1"></div></div>
+                        <div class="col-xs-12 col-sm-11 col-md-9">
+                           <h4 class="font-accident-two-medium uppercase">{{ blk.title }}</h4>
+                           <p class="">{{ blk.text }}</p>
+                        </div>
+                     </div>
+                     <div class="divider-dynamic"></div>
+                  </div>
+{% endfor %}
+               </div>
+            </div>
+         </div>
+
+         <!-- Education -->
+         <div id="pro-experience" class="col-md-4 flex-column edu ui-block-color01 personal" {{ anim("right", 400) }}>
+            <div class="padding-50 flex-panel">
+               <h3 class="font-accident-two-normal uppercase title">Education</h3>
+               <div class="dividewhite4"></div>
+               <div class="experience">
+{% for e in r.education %}
+                  <ul class="">
+                     <li class="date">{{ e.date | date(long=True) }}</li>
+                     <li class="company uppercase">
+                        <a{% if e.school_url is defined %} target="_blank" href="{{ e.school_url }}"{% endif %}>{{ e.school }}</a>
+                     </li>
+                     <li class="position">{{ e.degree }}</li>
+                  </ul>
+{% endfor %}
+               </div>
+               <a href="education.html" class="btn btn-blk btn-xs">Learn More</a>
+               <div class="dividewhite1"></div>
+            </div>
+         </div>
+
+      </div>
+   </section>
+
+   <section id="professional" class="container-fluid" data-section="home">
+      <div class="row flex-row">
+
+         <!-- Employment -->
+         <div id="pro-experience" class="col-md-4 flex-column dark nopadding ui-block-color05 flex-col" {{ anim("left", 200) }}>
+            <div class="padding-50 flex-panel">
+               <h3 class="font-accident-two-normal uppercase title">Employment</h3>
+               <div class="dividewhite4"></div>
+               <div class="experience">
+{% for id in w.home.employment %}
+{% set e = by_id[id] %}
+{% set t = w.timeline[id] %}
+                  <ul class="">
+                     <li class="date">{{ e.start | year }} - {{ e.end | year }}</li>
+                     <li class="company uppercase">
+                        <a target="_blank" href="{{ e.org_url | default(t.url) | default('#') }}">{{ e.org.split(' — ')[0] }}</a>
+                     </li>
+                     <li class="position">{{ e.title }}</li>
+                  </ul>
+{% endfor %}
+               </div>
+               <a href="experience.html" class="btn btn-wh-trans btn-xs">Learn More</a>
+               <div class="dividewhite1"></div>
+            </div>
+         </div>
+
+         <!-- Professional skills -->
+         <div id="circle-skills" class="col-md-8 flex-column dark nopadding ui-block-color03 flex-col" data-section="progress" {{ anim("right", 300) }}>
+            <div class="padding-50 flex-panel">
+               <h3 class="font-accident-two-normal uppercase title">Professional skills</h3>
+               <div class="dividewhite1"></div>
+               <div class="row">
+{% for s in w.home.skills %}
+                  <div class="col-md-4 col-sm-4 col-xs-12 nopadding">
+                     <div class="progressbar text-center">
+                        <div class=""><i class="fa {{ s.icon }} fa-inverse fa-4x {{ s.color }}" aria-hidden="true"></i></div>
+                        <h4 class="font-accident-two-bold uppercase">{{ s.title }}</h4>
+                        <p class="font-regular-normal">{{ s.text }}</p>
+                        <a href="skills.html" class="btn btn-wh-trans btn-xs">Learn More</a>
+                     </div>
+                     <div class="dividewhite1"></div>
+                  </div>
+{% endfor %}
+               </div>
+            </div>
+         </div>
+
+      </div>
+   </section>
+{% endblock %}

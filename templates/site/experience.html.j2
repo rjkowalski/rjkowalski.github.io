@@ -1,0 +1,57 @@
+{% extends "site/_base.html.j2" %}
+{% from "site/_macros.html.j2" import anim, page_title %}
+{% block title %}Experience{% endblock %}
+{% block description %}Professional timeline of {{ r.basics.name }}: Nova Scotia Health, IWK Health Centre, BlueLight Analytics, BlackBerry, and the NASA ANITA experiment at the University of Hawai'i.{% endblock %}
+{% block content %}
+
+   <div id="blog" class="inner-content">
+
+{{ page_title(4, "Professional Experience", "My professional timeline in the Public & Private Sector") }}
+
+      <!-- Timeline Block -->
+      <section id="timeline" class="light inner-section">
+         <div class="container-fluid nopadding">
+
+            <div class="text-center" {{ anim("top", 400, "30px") }}>
+               <div class="dividewhite4"></div>
+               <h3 class="font-accident-two-normal uppercase">Professional Timeline</h3>
+               <div class="dividewhite1"></div>
+            </div>
+
+            <ul class="timeline-vert timeline">
+{% for e in r.experience %}
+{% set t = w.timeline[e.id] %}
+{% set inverted = loop.index0 is even %}
+               <li{% if inverted %} class="timeline-inverted"{% endif %}>
+                  <div class="timeline-badge {{ t.badge }}"><i class="fa {{ t.icon }}" aria-hidden="true"></i></div>
+                  <div class="timeline-panel" {{ anim("right" if inverted else "left", 400, "25px") }}>
+                     <p class="timeline-time fontcolor-invert">{{ e.start | date }} - {{ e.end | date }}</p>
+                     <div class="timeline-photo {{ t.photo }}"></div>
+                     <div class="timeline-heading">
+                        <a target="_blank" href="{{ e.org_url | default(t.url) | default('#') }}" class="color-orange"><h4 class="font-accident-two-normal uppercase">{{ t.label | default(e.org.replace(' — ', ' | ')) }}</h4></a>
+                        <h6 class="uppercase">{{ e.title }}</h6>
+                        <p class="small font-regular-light">{{ e.location }}</p>
+{% if e.bullets %}
+                        <ul class="bullets">
+{% for bl in e.bullets %}
+                           <li>{{ bl.text }}</li>
+{% endfor %}
+                        </ul>
+{% endif %}
+                     </div>
+                  </div>
+               </li>
+{% endfor %}
+            </ul>
+
+            <div class="text-center">
+               <a href="contact.html" class="btn btn-darker" {{ anim("bottom", 600, "35px", 300) }}>Contact Me</a>
+            </div>
+            <div class="dividewhite6"></div>
+
+         </div>
+      </section>
+      <!-- /Timeline Block -->
+
+   </div>
+{% endblock %}

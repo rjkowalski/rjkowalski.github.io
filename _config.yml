@@ -1,0 +1,10 @@
+# GitHub Pages (Jekyll) settings: serve the generated HTML, not the build inputs.
+exclude:
+  - data
+  - templates
+  - out
+  - build.py
+  - pyproject.toml
+  - uv.lock
+  - README.md
+  - .venv

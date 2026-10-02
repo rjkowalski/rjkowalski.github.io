@@ -1,0 +1,47 @@
+{% extends "site/_base.html.j2" %}
+{% from "site/_macros.html.j2" import anim, page_title %}
+{% block title %}About{% endblock %}
+{% block description %}{{ r.summary }}{% endblock %}
+{% block content %}
+
+   <div id="resume" class="inner-content">
+
+{% call page_title(2, "About Me", w.about.subtitle) %}
+            <p class="small color01" {{ anim("right", 300) }}>
+{% for para in w.about.story %}
+               {{ para }}{% if not loop.last %}<br/><br/>{% endif %}
+
+{% endfor %}
+            </p>
+            <p class="custom-font-signature">{{ r.basics.name }}</p>
+{% endcall %}
+
+      <section class="inner-section light bg-color01">
+         <div class="container-fluid nopadding">
+            <h3 class="font-accident-two-normal uppercase text-center">What I can do for you</h3>
+            <div class="dividewhite1"></div>
+            <p class="small text-center fontcolor-medium">{{ w.about.pitch }}</p>
+            <div class="dividewhite4"></div>
+         </div>
+         <div class="row info-links">
+{% for column in w.about.facts | slice(2) %}
+            <div class="col-md-6" {{ anim("left" if loop.first else "right", 400, "30px") }}>
+{% for f in column %}
+               <div class="row">
+                  <div class="col-sm-4"><span class="font-accident-two-bold uppercase">{{ f.label }}:</span></div>
+                  <div class="col-sm-8"><p class="">{% if f.url is defined %}<a href="{{ f.url }}" class="color-blue">{{ f.text }}</a>{% else %}{{ f.text }}{% endif %}</p></div>
+               </div>
+{% endfor %}
+{% if loop.last %}
+               <div class="row">
+                  <div class="col-sm-4"><span class="font-accident-two-bold uppercase">Interests:</span></div>
+                  <div class="col-sm-8"><p class="">{{ r.interests | join(", ") }}</p></div>
+               </div>
+{% endif %}
+            </div>
+{% endfor %}
+         </div>
+      </section>
+
+   </div>
+{% endblock %}

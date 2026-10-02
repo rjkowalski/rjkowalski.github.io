@@ -1,0 +1,43 @@
+@page { size: Letter; margin: 0.45in 0.55in; }
+
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 9.4pt;
+  line-height: 1.24;
+  color: #1d1d1f;
+}
+a { color: inherit; text-decoration: none; }
+
+header { border-bottom: 1.5pt solid #1f4e79; padding-bottom: 5pt; margin-bottom: 6pt; }
+h1 { font-size: 20pt; margin: 0; letter-spacing: 0.3pt; color: #1f4e79; }
+.headline { margin: 1pt 0 3pt; font-size: 10.5pt; font-weight: 600; }
+.contact { margin: 0; font-size: 8.8pt; color: #444; }
+
+h2 {
+  font-size: 9.6pt; text-transform: uppercase; letter-spacing: 1pt;
+  color: #1f4e79; border-bottom: 0.5pt solid #b8c7d6;
+  margin: 7pt 0 3pt; padding-bottom: 1pt;
+}
+section { break-inside: auto; }
+.summary { margin: 0; }
+
+.entry { margin-bottom: 4pt; break-inside: avoid; }
+.row { display: flex; justify-content: space-between; gap: 8pt; }
+.org { font-weight: 700; }
+.dates, .loc { white-space: nowrap; color: #444; }
+.sub { font-style: italic; }
+.loc { font-style: normal; font-size: 8.8pt; }
+.thesis { font-size: 9pt; color: #333; }
+
+ul { margin: 2pt 0 0; padding-left: 13pt; }
+li { margin-bottom: 1pt; }
+ul.plain { padding-left: 13pt; }
+li.draft { background: #fff3b0; }
+.press { margin: 2pt 0 0; font-size: 8.8pt; color: #444; }
+
+dl.skills { display: grid; grid-template-columns: max-content 1fr; gap: 1.5pt 8pt; margin: 0; }
+dl.skills dt { font-weight: 700; }
+dl.skills dd { margin: 0; }

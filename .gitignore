@@ -7,3 +7,9 @@
 ######################
 *.css.map
 .sass-cache
+
+# Build #
+######################
+.venv/
+__pycache__/
+out/

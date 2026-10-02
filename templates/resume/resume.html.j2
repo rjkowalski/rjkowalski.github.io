@@ -1,0 +1,119 @@
+{#- One tailored resume. build.py passes r = tailor(...) plus r.sections. -#}
+{% set b = r.basics %}
+{% set show_thesis = r.long or r.lane in ["ai-training", "space", "teaching"] %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{{ b.name }} — Resume ({{ r.lane }})</title>
+<style>{{ css | safe }}</style>
+</head>
+<body>
+
+<header>
+  <h1>{{ b.name }}</h1>
+  <p class="headline">{{ r.headline }}</p>
+  <p class="contact">
+    {{ b.location }} · {{ b.phone }} · <a href="mailto:{{ b.email }}">{{ b.email }}</a><br>
+    <a href="{{ b.profiles.linkedin }}">{{ b.profiles.linkedin | replace("https://www.", "") }}</a> ·
+    <a href="{{ b.profiles.github }}">{{ b.profiles.github | replace("https://", "") }}</a> ·
+    <a href="{{ b.website }}">{{ b.website | replace("https://", "") }}</a>
+  </p>
+</header>
+
+<section>
+  <p class="summary">{{ r.summary }}</p>
+</section>
+
+<section>
+  <h2>Experience</h2>
+{% for e in r.experience %}
+  <div class="entry">
+    <div class="row"><span class="org">{{ e.org }}</span><span class="dates">{{ e.start | date }} – {{ e.end | date }}</span></div>
+    <div class="row sub"><span class="title">{{ e.title }}</span><span class="loc">{{ e.location }}</span></div>
+{% if e.bullets %}
+    <ul>
+{% for bl in e.bullets %}
+      <li{% if bl.get("status") == "draft" %} class="draft"{% endif %}>{{ bl.text }}</li>
+{% endfor %}
+    </ul>
+{% endif %}
+  </div>
+{% endfor %}
+</section>
+
+<section>
+  <h2>Education</h2>
+{% for e in r.education %}
+  <div class="entry">
+    <div class="row"><span><span class="org">{{ e.degree }}</span>, {{ e.school }}</span><span class="dates">{{ e.date | year }}</span></div>
+{% if show_thesis and e.thesis is defined %}
+    <div class="thesis">Thesis: <i>{{ e.thesis }}</i></div>
+{% endif %}
+{% if e.highlights %}
+    <ul>
+{% for h in e.highlights %}
+      <li>{{ h.text }}</li>
+{% endfor %}
+    </ul>
+{% endif %}
+  </div>
+{% endfor %}
+</section>
+
+{% for section in r.sections %}
+{% if section == "honours" and r.honours %}
+<section>
+  <h2>Honours</h2>
+  <ul class="plain">
+{% for h in r.honours %}
+    <li><b>{{ h.name }}</b> ({{ h.date | year }}){% if h.detail is defined %} — {{ h.detail }}{% endif %}</li>
+{% endfor %}
+  </ul>
+</section>
+{% elif section == "publications" and r.publications %}
+<section>
+  <h2>Selected Publications</h2>
+  <ul class="plain">
+{% for p in r.publications if p.kind != "press" %}
+    <li>{{ p.authors }}, “{{ p.title }},” {% if p.venue != "internal" %}<i>{{ p.venue }}</i>, {% endif %}{{ p.date | year }}{{ " (internal note)" if p.kind == "internal" else "" }}.</li>
+{% endfor %}
+  </ul>
+{% if r.publications | selectattr("kind", "equalto", "press") | list %}
+  <p class="press">Photo credits: {{ r.publications | selectattr("kind", "equalto", "press") | map(attribute="title") | join("; ") }}.</p>
+{% endif %}
+</section>
+{% elif section == "certifications" and r.certifications %}
+<section>
+  <h2>Certifications &amp; Training</h2>
+  <ul class="plain">
+{% for c in r.certifications %}
+    <li>{{ c.name }}{% if c.issuer is defined %}, {{ c.issuer }}{% endif %} ({{ c.date | year }})</li>
+{% endfor %}
+  </ul>
+</section>
+{% elif section == "leadership" and r.leadership %}
+<section>
+  <h2>Leadership</h2>
+  <ul class="plain">
+{% for l in r.leadership %}
+    <li>{{ l.text }}</li>
+{% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endfor %}
+
+{% if r.skills %}
+<section>
+  <h2>Skills</h2>
+  <dl class="skills">
+{% for g in r.skills %}
+    <dt>{{ g.group }}</dt><dd>{{ g["items"] | map(attribute="name") | join(", ") }}</dd>
+{% endfor %}
+  </dl>
+</section>
+{% endif %}
+
+</body>
+</html>

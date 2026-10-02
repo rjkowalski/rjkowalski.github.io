@@ -1,0 +1,112 @@
+{% extends "site/_base.html.j2" %}
+{% from "site/_macros.html.j2" import anim, page_title %}
+{% block title %}Education{% endblock %}
+{% block description %}M.Sc. Physics (University of Hawai'i), B.Sc. Astrophysics (Saint Mary's University), certifications, honours, and publications of {{ r.basics.name }}.{% endblock %}
+{% block content %}
+
+   <div id="feedback" class="inner-content">
+
+{{ page_title(5, "Education", "Degrees, certifications, awards, and publications") }}
+
+      <!-- Education Block -->
+      <section id="testmonials" class="inner-section bg-color02" {{ anim("top", 400, "30px") }}>
+         <div class="container-fluid nopadding">
+            <div class="dividewhite4"></div>
+            <div class="row">
+{% for e in r.education %}
+               <div class="col-md-4">
+                  <div class="row">
+                     <div class="col-xs-3">
+{% if e.school in w.school_images %}
+                        <img src="{{ w.school_images[e.school] }}" alt="{{ e.school }}" class="img-responsive img-circle author-userpic">
+{% endif %}
+                     </div>
+                     <div class="col-xs-9">
+                        <h5 class="font-accident-two-bold text-left">{{ e.degree }} - {{ e.date | date(long=True) }}</h5>
+                        <p class="small uppercase font-regular-medium">{% if e.school_url is defined %}<a target="_blank" href="{{ e.school_url }}" class="color-red">{{ e.school }}</a>{% else %}<span class="color-red">{{ e.school }}</span>{% endif %}</p>
+                        <ul class="extrasmall bullets text-left">
+{% if e.thesis is defined %}
+                           <li>Thesis: <i class="font-regular-normal-italic-blue">{{ e.thesis }}</i></li>
+{% endif %}
+{% for h in e.highlights %}
+                           <li>{% if h.url is defined %}<a target="_blank" href="{{ h.url }}">{{ h.text }}</a>{% else %}{{ h.text }}{% endif %}</li>
+{% endfor %}
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="divider-dynamic"></div>
+               </div>
+{% endfor %}
+            </div>
+            <div class="dividewhite4"></div>
+{% if r.honours or r.leadership %}
+            <h3 class="font-accident-two-normal uppercase text-center">Honours &amp; Leadership</h3>
+            <div class="dividewhite1"></div>
+            <div class="row">
+               <div class="col-md-8 col-md-offset-2">
+                  <ul class="extrasmall bullets text-left">
+{% for h in r.honours %}
+                     <li><b>{{ h.name }}</b> ({{ h.date | date }}){% if h.detail is defined %}: {{ h.detail }}{% endif %}</li>
+{% endfor %}
+{% for l in r.leadership %}
+                     <li>{{ l.text }}</li>
+{% endfor %}
+                  </ul>
+               </div>
+            </div>
+{% endif %}
+            <div class="dividewhite6"></div>
+         </div>
+      </section>
+      <!-- /Education Block -->
+
+      <section>
+         <div class="row flex-row">
+            <div id="pro-experience" class="col-md-4 flex-column dark nopadding ui-block-color04 flex-col" {{ anim("left", 200) }}>
+               <div class="padding-50 flex-panel">
+                  <h3 class="font-accident-two-normal uppercase title">Certifications &amp; Training</h3>
+                  <div class="dividewhite4"></div>
+                  <div class="experience">
+{% for c in r.certifications %}
+                     <ul class="">
+                        <li class="date">{{ c.date | year }}</li>
+                        <li class="company">
+                           <a{% if c.url is defined %} target="_blank" href="{{ c.url }}"{% endif %}>{{ c.name }}{% if c.issuer is defined %} - {{ c.issuer }}{% endif %}</a>
+                        </li>
+                     </ul>
+{% endfor %}
+                  </div>
+               </div>
+            </div>
+            <div id="pro-experience" class="col-md-8 flex-column dark nopadding bg-color18 flex-col" {{ anim("right", 300) }}>
+               <div class="padding-50 flex-panel">
+                  <h3 class="font-accident-two-normal uppercase title">Publications</h3>
+                  <div class="dividewhite1"></div>
+                  <div class="container-fluid nopadding">
+                     <h4 class="font-accident-two-normal title">Journal Articles &amp; Conference Proceedings</h4>
+                     <br>
+{% for p in r.publications if p.kind != "press" %}
+                     <p>“{{ p.title }}”, {{ p.authors }}, {{ p.venue if p.venue != "internal" else "" }}{{ ", " if p.venue != "internal" else "" }}{{ p.date | year }}{{ " (internal)" if p.kind == "internal" else "" }}.</p>
+{% endfor %}
+                     <div class="dividewhite2"></div>
+                     <hr>
+                     <h4 class="font-accident-two-normal title">Photo Publications</h4>
+                     <div id="pro-experience">
+                        <div class="experience">
+{% for p in r.publications if p.kind == "press" %}
+                           <ul class="">
+                              <li class="date">{{ p.date | date }}</li>
+                              <li class="company"><a target="_blank" href="{{ p.url }}">{{ p.title }}</a></li>
+                           </ul>
+{% endfor %}
+                        </div>
+                     </div>
+                  </div>
+                  <div class="dividewhite6"></div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+   </div>
+{% endblock %}

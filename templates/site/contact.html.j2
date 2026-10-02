@@ -1,0 +1,98 @@
+{% extends "site/_base.html.j2" %}
+{% from "site/_macros.html.j2" import anim, page_title %}
+{% set b = r.basics %}
+{% block title %}Contact{% endblock %}
+{% block description %}Get in touch. Reach out via email, give me a call, or use the contact form on this page.{% endblock %}
+{% block content %}
+
+   <div id="contacts" class="inner-content">
+
+{{ page_title(6, "Contact", "Get in touch by phone, email or online") }}
+
+      <section id="contacts-data" class="inner-block">
+         <div class="container-fluid nopadding">
+            <div class="dividewhite8"></div>
+            <div class="row info-links">
+               <div class="col-md-6" {{ anim("left", 400, "30px") }}>
+                  <div class="row">
+                     <div class="col-sm-2"><span class="font-accident-two-bold uppercase">Location:</span></div>
+                     <div class="col-sm-10"><p class="small">{{ b.location }}</p></div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-2"><span class="font-accident-two-bold uppercase">Phone:</span></div>
+                     <div class="col-sm-10"><p class="small"><a href="tel:{{ b.phone }}" class="color-yellow">{{ b.phone }}</a></p></div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-2"><span class="font-accident-two-bold uppercase">E-mail:</span></div>
+                     <div class="col-sm-10"><p class="small"><a href="mailto:{{ b.email }}" class="color-yellow">{{ b.email }}</a></p></div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-2"><span class="font-accident-two-bold uppercase">LinkedIn:</span></div>
+                     <div class="col-sm-10"><p class="small"><a href="{{ b.profiles.linkedin }}" class="color-yellow">{{ b.profiles.linkedin }}</a></p></div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-2"><span class="font-accident-two-bold uppercase">GitHub:</span></div>
+                     <div class="col-sm-10"><p class="small"><a href="{{ b.profiles.github }}" class="color-yellow">{{ b.profiles.github }}</a></p></div>
+                  </div>
+               </div>
+               <div class="col-md-6" {{ anim("right", 400, "30px") }}>
+                  <div class="row">
+                     <div class="col-sm-2"><span class="font-accident-two-bold uppercase">DataCamp:</span></div>
+                     <div class="col-sm-10"><p class="small"><a href="{{ b.profiles.datacamp }}" class="color-yellow">{{ b.profiles.datacamp }}</a></p></div>
+                  </div>
+{% for c in w.contact_extra %}
+                  <div class="row">
+                     <div class="col-sm-2"><span class="font-accident-two-bold uppercase">{{ c.label }}:</span></div>
+                     <div class="col-sm-10"><p class="small"><a href="{{ c.url }}" class="color-yellow">{{ c.text }}</a></p></div>
+                  </div>
+{% endfor %}
+               </div>
+            </div>
+            <div class="dividewhite1"></div>
+         </div>
+      </section>
+
+      <!-- Feedback Block -->
+      <section class="inner-section feedback feedback-light" data-section="feedback">
+         <div class="container-fluid nopadding">
+            <div class="row">
+               <div class="" {{ anim("top", 400, "30px") }}>
+                  <div class="dividewhite2"></div>
+                  <h3 class="font-accident-two-normal uppercase text-center">Send Me a Direct Message</h3>
+                  <h5 class="font-accident-two-normal uppercase text-center subtitle color-yellow">Contact me here and I will get back to you ASAP</h5>
+               </div>
+               <div class="col-md-2">&nbsp;</div>
+               <div class="col-md-8 e-centered" {{ anim("bottom", 500, "30px") }}>
+                  <div class="dividewhite4"></div>
+                  <div id="form-messages"></div>
+                  <form method="POST" action="https://formspree.io/{{ b.email }}">
+                     <input name="_subject" id="subject" type="hidden" value="New Message from your Personal Website">
+                     <div class="field">
+                        <label>Name</label>
+                        <input name="name" id="name" type="text" value="" required>
+                     </div>
+                     <div class="field">
+                        <label>E-mail</label>
+                        <input name="email" id="email" type="email" value="" required>
+                     </div>
+                     <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="_gotcha" style="display:none"></div>
+                     <div class="field">
+                        <label for="message">Message</label>
+                        <textarea name="message" id="message" rows="5"></textarea>
+                     </div>
+                     <div class="dividewhite2"></div>
+                     <ul class="actions">
+                        <button class="btn btn-lrg btn-darker submit" type="submit">Send Message</button> <span id="notice" class="alert alert-warning alert-dismissable hidden"></span>
+                     </ul>
+                  </form>
+               </div>
+               <div class="col-md-2">&nbsp;</div>
+               <div class="col-md-12 divider-dynamic"></div>
+            </div>
+         </div>
+         <div class="dividewhite6"></div>
+      </section>
+      <!-- /Feedback Block -->
+
+   </div>
+{% endblock %}

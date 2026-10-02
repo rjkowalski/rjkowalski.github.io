@@ -1,0 +1,15 @@
+{# Scroll-reveal attributes used by the theme's animation.js #}
+{% macro anim(origin, delay, distance="50px", duration=400) -%}
+data-animation-origin="{{ origin }}" data-animation-duration="{{ duration }}" data-animation-delay="{{ delay }}" data-animation-distance="{{ distance }}"
+{%- endmacro %}
+
+{# Coloured page-title band at the top of each inner page #}
+{% macro page_title(color, title, subtitle) -%}
+      <section id="page-title" class="inner-section ui-menu-color0{{ color }}">
+         <div class="container-fluid nopadding">
+            <h2 class="font-accident-two-bold color01" {{ anim("right", 100) }}>{{ title }}</h2>
+            <h4 class="font-accident-two-light color01 uppercase subtitle" {{ anim("right", 200) }}>{{ subtitle }}</h4>
+{% if caller is defined %}{{ caller() }}{% endif %}
+         </div>
+      </section>
+{%- endmacro %}

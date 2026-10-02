@@ -1,0 +1,13 @@
+[project]
+name = "rjkowalski-site"
+version = "0.1.0"
+description = "Builds rjkowalski.github.io and tailored resumes from data/resume.yaml"
+requires-python = ">=3.11"
+dependencies = [
+    "jinja2>=3.1",
+    "pyyaml>=6.0",
+    "pypdf>=4.0",
+]
+
+[tool.uv]
+package = false

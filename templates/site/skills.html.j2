@@ -1,0 +1,45 @@
+{% extends "site/_base.html.j2" %}
+{% from "site/_macros.html.j2" import anim, page_title %}
+{% block title %}Skills{% endblock %}
+{% block description %}Technical proficiencies of {{ r.basics.name }}: data engineering, medical imaging AI, cloud, scientific hardware, and project management.{% endblock %}
+{% block content %}
+
+   <div id="portfolio" class="inner-content">
+
+{{ page_title(3, "Skills", "Technical proficiencies & core competencies") }}
+
+      <section id="m-details" class="inner-section light bg-color02">
+         <div class="container-fluid nopadding">
+            <h3 class="font-accident-two-normal uppercase text-center">Technical Proficiencies</h3>
+            <div class="dividewhite1"></div>
+            <p class="small text-center fontcolor-medium">
+               Python for {{ python_years }}+ years, plus the tools, platforms, and lab equipment I use today.
+            </p>
+            <div class="dividewhite6"></div>
+         </div>
+{% for row in r.skills | batch(4) %}
+         <div class="row">
+{% for g in row %}
+            <div class="col-md-3 infoblock text-center" {{ anim("bottom", 300 + 100 * loop.index0, "30px") }}>
+               <div class="row">
+                  <div class="col-md-12"><i class="fa fa-3x {{ w.skill_icons.get(g.group, 'fa-code') }} color-cyan" aria-hidden="true"></i></div>
+                  <div class="col-md-12">
+                     <div class="dividewhite1"></div>
+                     <h5 class="font-accident-two-bold uppercase">{{ g.group }}</h5>
+                     <ul class="small">
+{% for s in g["items"] %}
+                        <li>{{ s.name }}</li>
+{% endfor %}
+                     </ul>
+                  </div>
+               </div>
+               <div class="divider-dynamic"></div>
+            </div>
+{% endfor %}
+         </div>
+         <div class="dividewhite4"></div>
+{% endfor %}
+      </section>
+
+   </div>
+{% endblock %}

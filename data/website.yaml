@@ -1,0 +1,129 @@
+# Website-only presentation and copy. Resume content lives in resume.yaml;
+# this file only says how the site shows it. Jinja expressions are not
+# evaluated here — {python_years} is the one placeholder build.py fills in.
+
+rotating_titles: [Data Engineer, AI Engineer, Technical Project Manager, Physicist]
+
+# Extra social links shown on the site but never on resumes.
+social:
+  - {icon: fa fa-github, url: "https://github.com/rjkowalski"}
+  - {icon: ai ai-researchgate, url: "https://www.researchgate.net/profile/Jeffrey_Kowalski"}
+  - {icon: fa fa-linkedin, url: "https://www.linkedin.com/in/rjkowalski"}
+  - {icon: fa fa-instagram, url: "http://instagram.com/rjeffreyk"}
+  - {icon: fa fa-facebook, url: "https://www.facebook.com/jeff.kowalski"}
+  - {icon: fa fa-twitter, url: "https://twitter.com/jeffreykowalski"}
+
+contact_extra:
+  - {label: Twitter, text: "@jeffreykowalski", url: "https://twitter.com/jeffreykowalski"}
+  - {label: Facebook, text: "facebook.com/jeff.kowalski", url: "https://www.facebook.com/jeff.kowalski"}
+  - {label: Instagram, text: "@rjeffreyk", url: "http://instagram.com/rjeffreyk"}
+
+# Home page
+home:
+  employment: [nsh, iwk, bluelight, blackberry]
+  infoblocks:
+    - icon: fa-comments-o
+      title: Communication
+      text: >-
+        Confident and adaptable, with strong oral, written, and presentation
+        skills — comfortable explaining technical work to radiologists,
+        executives, funders, and students.
+    - icon: fa-users
+      title: Leadership
+      text: >-
+        Former startup CTO and R&D program manager who builds productive teams
+        by playing to individual strengths.
+    - icon: fa-lightbulb-o
+      title: Initiative
+      text: >-
+        Self-directed and hands-on — from soldering flight hardware in
+        Antarctica to shipping data platforms in a hospital.
+  skills:
+    - icon: fa-database
+      color: color33
+      title: Data & AI Engineering
+      text: >-
+        Python for {python_years}+ years. ETL pipelines, Databricks, Docker, and
+        MongoDB/PostgreSQL; DICOM de-identification and MONAI Label annotation
+        tooling for medical imaging AI.
+    - icon: fa-tasks
+      color: color34
+      title: Technical Project Management
+      text: >-
+        Former CTO and manager of an ~$8M R&D program with GE Healthcare
+        Canada. Agile teams, budgets, grant reporting, and IP commercialization.
+    - icon: fa-cogs
+      color: color35
+      title: Systems Integration
+      text: >-
+        Hardware, firmware, and RF integration for two NASA long-duration
+        balloon flights (New Mexico and Antarctica) and accelerator experiments
+        at SLAC.
+
+about:
+  subtitle: A short history of my academic and professional experience
+  story:
+    - >-
+      I'm a data and AI engineer with a background in physics and astrophysics
+      and more than 20 years of experience in technology research, development,
+      and innovation across the private sector, government, research
+      laboratories, and universities. I'm at my best on problems that mix
+      systems integration, data, and scientific reasoning.
+    - >-
+      Today I build the data infrastructure behind machine-learning research in
+      diagnostic imaging (MRI, CT, ultrasound) at Nova Scotia Health: ETL
+      pipelines, DICOM de-identification tooling, and annotation platforms for
+      radiologists. Before that, I managed innovation-focused imaging R&D at the
+      IWK Health Centre, including an ~$8M program building AI-based MRI tools
+      with GE Healthcare Canada.
+    - >-
+      Earlier, I was CTO of a dental-technology startup, leading the team behind
+      a cloud-based (AWS) SaaS analytics product used across North America,
+      South America, and Europe, and before that I built Python test-automation
+      software at BlackBerry for products used by millions.
+    - >-
+      My research career took me from stellar evolution models at Saint Mary's
+      to the ANITA neutrino experiment at the University of Hawai'i: accelerator
+      experiments at SLAC and two NASA long-duration balloon campaigns, in New
+      Mexico and Antarctica. Along the way I made the top 100 of the Canadian
+      Space Agency's astronaut recruitment campaign.
+  pitch: >-
+    I believe teamwork and communication are the cornerstone of any
+    organization's productivity. I bring problem-solving, data analysis, and the
+    ability to communicate complex ideas clearly — to engineers, clinicians,
+    executives, and students alike.
+  facts:
+    - {label: Nationality, text: Canadian}
+    - {label: Languages, text: "English, French (basic)"}
+    - {label: Education, text: "B.Sc. Astrophysics | M.Sc. Physics", url: education.html}
+    - {label: Current Position, text: "Data & AI Engineer | Nova Scotia Health", url: experience.html}
+    - {label: Industries of Interest, text: "Space, Health Technology, AI, Renewable Energy"}
+    - {label: Specialities, text: "Data Engineering, Medical Imaging AI, Project Management, Systems Integration", url: skills.html}
+
+# Experience timeline styling, keyed by experience id
+timeline:
+  nsh:        {icon: fa-hospital-o,       badge: primary, photo: timeline-samuel-00, label: "Nova Scotia Health | BIOTIC"}
+  iwk:        {icon: fa-hospital-o,       badge: primary, photo: timeline-samuel-01}
+  bluelight:  {icon: fa-building-o,       badge: success, photo: timeline-samuel-02, url: "http://curingresin.com/"}
+  blackberry: {icon: fa-building-o,       badge: danger,  photo: timeline-samuel-03, url: "https://ca.blackberry.com/"}
+  nb-sd17:    {icon: fa-building-o,       badge: warning, photo: timeline-samuel-04}
+  uh-ra:      {icon: fa-graduation-cap,   badge: danger,  photo: timeline-samuel-05, url: "https://manoa.hawaii.edu/"}
+  uh-ta:      {icon: fa-graduation-cap,   badge: warning, photo: timeline-samuel-05, url: "https://manoa.hawaii.edu/"}
+  smu-ra:     {icon: fa-graduation-cap,   badge: danger,  photo: timeline-samuel-06, url: "http://www.smu.ca/"}
+
+# Education page school crests, keyed by school name
+school_images:
+  "University of Hawai'i at Mānoa": assets/custom/2.2.0/images/layouts/samuel/timeline/uhm-circ.png
+  "Saint Mary's University": assets/custom/2.2.0/images/layouts/samuel/timeline/smu-circ-2.jpg
+  "Minto Memorial High School": assets/custom/2.2.0/images/layouts/samuel/timeline/mmhs.jpg
+
+# Skills page group icons, keyed by skill group
+skill_icons:
+  Data Engineering: fa-database
+  Medical Imaging & AI: fa-heartbeat
+  Automation: fa-magic
+  Databases: fa-table
+  Cloud & DevOps: fa-cloud
+  Visualization & Apps: fa-bar-chart
+  Scientific & Hardware: fa-microchip
+  Project & Product Management: fa-tasks

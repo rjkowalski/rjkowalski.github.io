@@ -1,0 +1,636 @@
+# ---------------------------------------------------------------------------
+# Master resume — single source of truth for rjkowalski.github.io and all
+# tailored resumes. Merged from the 2016–2025 resume archive, cover letters,
+# and the current website.
+#
+# Lanes (filter keys):
+#   data-eng     data engineering / platform / cloud
+#   ai-training  AI training & evaluation platforms (physics + Python expert)
+#   space        space sector / instrumentation / systems integration
+#   pm           technical project / product management, fractional leadership
+#   teaching     university instruction, outreach
+#   general      include everywhere
+#
+# Conventions:
+#   tags: [...]      lanes a bullet/item belongs to
+#   priority: 1-3    1 = always show when lane matches, 3 = only in long form
+#   public: false    never render on the website (still usable in PDFs)
+#   note: "..."      TODO/VERIFY for you; renderer must ignore it
+#   status: draft    hide from output until reviewed
+#   (YAML comments inside >- folded text become part of the text — use note:)
+# ---------------------------------------------------------------------------
+
+schema_version: 1
+updated: 2026-10-02
+
+basics:
+  name: R. Jeffrey Kowalski
+  short_name: Jeff Kowalski
+  location: Halifax, Nova Scotia, Canada
+  email: jeffreykowalski@gmail.com
+  phone: "+1 (902) 802-8635"
+  # Street address deliberately omitted — add per application, never on the site.
+  website: https://rjkowalski.github.io
+  citizenship: Canadian
+  languages: [English, French (basic reading and conversation)]
+  profiles:
+    linkedin: https://www.linkedin.com/in/rjkowalski
+    github: https://github.com/rjkowalski
+    researchgate: https://www.researchgate.net/profile/Jeffrey_Kowalski
+    datacamp: https://app.datacamp.com/profile/jeffreykowalski
+  python_since: 2004   # render as "{current_year - python_since}+ years" so it never goes stale
+
+headlines:
+  general: Data Engineer · AI Engineer · Technical Project Manager · Physicist
+  data-eng: Data & AI Engineer — Python, Databricks, Medical Imaging Pipelines
+  ai-training: Physicist & Python Engineer — M.Sc. Physics, 20+ years of scientific computing
+  space: Physicist, Systems Integrator & Data Engineer — NASA LDB flight veteran
+  pm: Technical Project Manager & Former CTO
+  teaching: Physicist & Educator — M.Sc. Physics, B.Sc. Astrophysics
+
+summaries:
+  general: >-
+    Data and AI engineer with a background in physics and astrophysics and more
+    than 20 years of experience across research labs, startups, a multinational,
+    and Atlantic Canada's largest health research system. I build data platforms
+    and AI tooling for medical imaging, have led product and engineering as a
+    startup CTO, and spent my early career integrating and flying NASA balloon
+    payloads from New Mexico and Antarctica.
+  data-eng: >-
+    Data and AI engineer building the data infrastructure behind machine-learning
+    research in diagnostic imaging (MRI, CT, ultrasound) at Nova Scotia Health.
+    I design ETL pipelines, PHI de-identification tooling, and annotation
+    platforms for radiologists, working in Python, Databricks, Docker, and
+    MongoDB. Previously CTO of a SaaS startup and test-automation developer at
+    BlackBerry.
+  ai-training: >-
+    Physicist (M.Sc., University of Hawai'i; B.Sc. Astrophysics, Saint Mary's)
+    and Python engineer with 20+ years of scientific computing. Thesis research
+    on radio detection of ultra-high-energy neutrinos (Askaryan effect, ANITA)
+    and numerical stability in stellar evolution codes. Today I build data
+    pipelines and AI tooling for medical imaging research.
+  space: >-
+    Physicist and engineer with hands-on space-science experience: hardware,
+    firmware, and RF integration for the NASA ANITA long-duration balloon
+    payload, two flight campaigns (Fort Sumner, NM and a three-month McMurdo
+    deployment in Antarctica), and payload commanding over TDRSS. Top-100
+    candidate in the Canadian Space Agency's astronaut recruitment campaign.
+    Since then: startup CTO, technical PM on multi-million-dollar R&D programs,
+    and data/AI engineer.
+  pm: >-
+    Technical project manager and former startup CTO with a record of delivering
+    R&D programs across government, industry, and academia — including an
+    ~$8M ACOA Atlantic Innovation Fund program with GE Healthcare Canada.
+    Hands-on technical background in Python, cloud, and data engineering, so I
+    can manage engineers and also speak their language.
+  teaching: >-
+    Physicist (M.Sc. Physics, B.Sc. Astrophysics) with university teaching
+    assistant and K–12 classroom experience, plus 20 years applying physics and
+    computation in research and industry. I bring real-world examples from NASA
+    balloon missions, accelerator experiments, and medical imaging AI.
+
+# ---------------------------------------------------------------------------
+experience:
+
+  - id: nsh
+    org: Nova Scotia Health — Biomedical Translational Imaging Centre (BIOTIC)
+    org_url: http://bioticimaging.ca/
+    title: Research Analyst/Coordinator (Data & AI Engineer)
+    location: Halifax, NS
+    start: 2022-07
+    end: present
+    tags: [general]
+    bullets:
+      - text: >-
+          Build and orchestrate ETL pipelines in Python for academic and
+          industry machine-learning research in diagnostic imaging (MRI, CT,
+          ultrasound).
+        tags: [data-eng, ai-training, pm, general]
+        priority: 1
+      - text: >-
+          Designed and implemented a Docker-based, standards-aligned DICOM
+          de-identification toolkit (MR, CT, ultrasound) to protect personal
+          health information, including pixel-level scrubbing of burned-in
+          identifiers and metadata tag sanitization.
+        tags: [data-eng, general]
+        priority: 1
+      - text: >-
+          Deploy and support MONAI Label segmentation tooling in Docker for
+          radiologist annotation workflows with 3D Slicer; diagnosed and fixed
+          defects in the MONAI Label Reviewer extension through source-level
+          debugging.
+        tags: [data-eng, ai-training]
+        priority: 1
+      - text: >-
+          Built ReqIntake, an autonomous requisition-management system for Nova
+          Scotia Health that takes faxed paper requisitions, creates them in
+          OceanMD through Python/Playwright browser automation (RPA), and
+          delivers them downstream to the Novari system.
+        note: "Optional: add volume (requisitions/month) or staff time saved"
+        tags: [data-eng, pm, general]
+        priority: 1
+      - text: >-
+          Led the design of and built a containerized medical imaging annotation
+          platform (Orthanc DICOM store, OHIF viewer, PostgreSQL), fully
+          deployed on internal hospital infrastructure.
+        tags: [data-eng, pm, ai-training]
+        priority: 1
+      - text: >-
+          Engineer data pipelines, manage data catalogs, and build front-end
+          applications on Databricks.
+        tags: [data-eng]
+        priority: 1
+      - text: >-
+          Co-led strategic planning for introducing AI into diagnostic imaging
+          across Nova Scotia.
+        tags: [pm, data-eng, general]
+        priority: 1
+      - text: >-
+          Built BI dashboards for exploratory data analysis and operational
+          monitoring; designed and maintain MongoDB databases.
+        tags: [data-eng]
+        priority: 2
+      - text: >-
+          Work with multinational industry partners, radiologists, scientists,
+          and research executives across Nova Scotia Health.
+        tags: [pm, space]
+        priority: 3
+
+  - id: iwk
+    org: IWK Health Centre — BIOTIC
+    title: Project Manager
+    location: Halifax, NS
+    start: 2016-08
+    end: 2022-07
+    tags: [general]
+    bullets:
+      - text: >-
+          Managed innovation-focused imaging R&D programs, including an ~$8M
+          ACOA Atlantic Innovation Fund program developing AI-based MRI tools in
+          partnership with GE Healthcare Canada.
+        tags: [pm, general, space]
+        priority: 1
+      - text: >-
+          Tracked deliverables for software tools across MRI, MEG, PET, CT, and
+          EEG; wrote quarterly and annual reports for industry partners and
+          government funders.
+        tags: [pm]
+        priority: 1
+      - text: >-
+          Developed proposals, budgets, milestones, and reporting; managed
+          recruiting, onboarding, and finances in SAP.
+        tags: [pm]
+        priority: 2
+      - text: >-
+          Initiated the commercialization strategy for IP developed across all
+          projects.
+        tags: [pm]
+        priority: 2
+      - text: >-
+          Architected Python data-analysis packages and introduced Git-based
+          version control (GitLab) across all development.
+        tags: [data-eng, pm]
+        priority: 2
+      - text: Transitioned into a data engineering role in the final six months.
+        tags: [data-eng]
+        priority: 3
+
+  - id: bluelight
+    org: BlueLight Analytics Inc.
+    title: Chief Technology Officer
+    location: Halifax, NS
+    start: 2011-10
+    end: 2015-10
+    tags: [general]
+    bullets:
+      - text: >-
+          Led product, R&D, and engineering for a hardware-facing SaaS analytics
+          platform for field-testing dental curing lights, serving customers in
+          North America, South America, and Europe.
+        tags: [general, pm, data-eng, space]
+        priority: 1
+      - text: >-
+          Directed the AWS cloud strategy and all IT infrastructure; managed and
+          mentored the software team using agile practices.
+        tags: [data-eng, pm]
+        priority: 1
+      - text: >-
+          Led development of laboratory testing standards and a Python package
+          that analyzes lab data and generates customer reports.
+        tags: [data-eng, ai-training, space]
+        priority: 2
+      - text: >-
+          Spearheaded marketing, brand development, technical customer service,
+          and customer training; modernized company websites to responsive
+          HTML5/CSS3.
+        tags: [pm]
+        priority: 3
+
+  - id: blackberry
+    org: BlackBerry
+    title: Test Automation Developer
+    location: Bedford, NS
+    start: 2008-12
+    end: 2011-07
+    tags: [general]
+    bullets:
+      - text: >-
+          Developed a Python library for executing and delivering automated test
+          cases on an international automation team.
+        tags: [data-eng, general, space]
+        priority: 1
+      - text: >-
+          Built MVC web applications, end-to-end test data collection and
+          reporting, and BI dashboards; managed servers and SQL databases.
+        tags: [data-eng]
+        priority: 2
+      - text: Mentored and managed junior developers.
+        tags: [pm]
+        priority: 3
+
+  - id: nb-sd17
+    org: New Brunswick School District 17
+    title: Substitute Teacher
+    location: Oromocto, NB
+    start: 2007-12
+    end: 2008-06
+    tags: [teaching]
+    bullets:
+      - text: >-
+          Taught grades 1–12 across mathematics, science, physical education,
+          outdoor pursuits, and technical courses; delivered lesson plans,
+          supervised classes, and graded work.
+        tags: [teaching]
+        priority: 1
+
+  - id: uh-ra
+    org: University of Hawai'i at Mānoa — ANITA Collaboration
+    title: Graduate Research Assistant
+    location: Honolulu, HI · SLAC · Fort Sumner, NM · McMurdo Station, Antarctica
+    start: 2004-05
+    end: 2007-10
+    tags: [general]
+    bullets:
+      - text: >-
+          Performed hardware, firmware, communications, and RF system integration
+          for ANITA (ANtarctic Impulsive Transient Antenna), a NASA Long
+          Duration Balloon radio telescope.
+        tags: [space, ai-training, general]
+        priority: 1
+      - text: >-
+          Participated in two NASA LDB flight campaigns, a test flight from
+          Fort Sumner, NM and a three-month deployment to McMurdo Station on the
+          Ross Ice Shelf, covering payload assembly, integration, and launch.
+        tags: [space, general, teaching]
+        priority: 1
+      - text: >-
+          Tested and performed payload commanding over TDRSS satellite
+          communications; on-call rotation keeping systems online 24/7.
+        tags: [space]
+        priority: 1
+      - text: >-
+          Tested and calibrated RF antennas, components, and cables with
+          spectrum and network analyzers, noise-figure and power meters,
+          anechoic chambers, and pulser/broadband noise sources.
+        tags: [space]
+        priority: 2
+      - text: >-
+          Ran proof-of-concept experiments at SLAC and built a Python package to
+          analyze large accelerator-based high-energy physics datasets.
+        tags: [space, ai-training, data-eng]
+        priority: 1
+
+  - id: uh-ta
+    org: University of Hawai'i at Mānoa
+    title: Teaching Assistant, Physics
+    location: Honolulu, HI
+    start: 2003-08
+    end: 2004-05
+    tags: [teaching, ai-training]
+    bullets:
+      - text: >-
+          Instructed labs and graded reports for two introductory electricity
+          and magnetism courses (~20 students each); taught and graded formal
+          reports for an advanced physics lab.
+        tags: [teaching, ai-training]
+        priority: 1
+
+  - id: smu-ra
+    org: Saint Mary's University
+    title: Undergraduate Research Assistant, Astrophysics
+    location: Halifax, NS
+    start: 2002-05
+    end: 2003-06
+    tags: [teaching, space, ai-training]
+    bullets:
+      - text: >-
+          Assessed the numerical stability of the Yale Stellar Evolution Code to
+          quantify uncertainties in p-mode oscillation frequencies (honours
+          thesis research).
+        tags: [ai-training, space, teaching]
+        priority: 1
+
+# ---------------------------------------------------------------------------
+education:
+  - degree: M.Sc. Physics
+    school: University of Hawai'i at Mānoa
+    school_url: https://manoa.hawaii.edu/
+    location: Honolulu, HI
+    date: 2007-08
+    thesis: Observation of the Askaryan Effect in Ice with the ANITA Experiment
+    tags: [general]
+    highlights:
+      - text: University of Hawai'i Graduate Student Organization academic grant ($1,000)
+        tags: [ai-training, teaching]
+        priority: 3
+      - text: Finisher of the 52-mile Hana Relay on Maui
+        tags: []
+        priority: 3
+  - degree: B.Sc. Astrophysics
+    school: Saint Mary's University
+    school_url: https://www.smu.ca/
+    location: Halifax, NS
+    date: 2003-05
+    thesis: >-
+      Determination of the Numerical Stability of the Yale Stellar Evolution
+      Code to Assess Uncertainties in P-mode Frequencies
+    tags: [general]
+    highlights:
+      - text: Saint Mary's University Scholarship ($3,000)
+        tags: [teaching, ai-training]
+        priority: 3
+  - degree: High School Diploma
+    school: Minto Memorial High School
+    location: Minto, NB
+    date: 1999-06
+    tags: [general]
+    priority: 3   # website only at default PDF settings
+    highlights:
+      - text: Governor General's Bronze Medal for highest academic standing
+        url: https://www.gg.ca/document.aspx?id=15008
+        tags: [general]
+        priority: 3
+      - text: Valedictorian, selected by peers
+        tags: [teaching]
+        priority: 3
+      - text: >-
+          Selected for Encounters with Canada, a national leadership conference
+          on science and technology in Ottawa
+        url: https://www.ewc-rdc.ca/pub/en
+        tags: [space, teaching]
+        priority: 3
+      - text: >-
+          Top Male Leader, New Brunswick Command Youth Leadership Camp at Mount
+          Allison University
+        tags: [teaching]
+        priority: 3
+
+certifications:
+  - name: Azure Fundamentals
+    issuer: DataCamp
+    date: 2024-06
+    tags: [data-eng]
+  - name: Data Engineer with Python
+    issuer: DataCamp
+    date: 2021-11
+    tags: [data-eng]
+  - name: The Fundamentals of Digital Marketing
+    issuer: Google Digital Garage
+    date: 2018
+    url: https://goo.gl/Tjymo6
+    tags: [pm]
+    priority: 3
+  - name: Canadian Pleasure Craft Operator Competency
+    date: 2014
+    url: http://www.boaterexam.com
+    tags: []
+    priority: 3
+  - name: SSI Open Water SCUBA Diver
+    date: 2009
+    url: http://www.divessi.com
+    tags: [space]
+    priority: 3
+  - name: Field Safety Training (cold-weather survival), McMurdo Station, Antarctica
+    issuer: United States Antarctic Program
+    date: 2006
+    tags: [space]
+    priority: 2
+  - name: Light Vehicle Operation Training, McMurdo Station, Antarctica
+    issuer: United States Antarctic Program
+    date: 2006
+    tags: [space]
+    priority: 3
+  - name: "RP0030: Protecting Antarctica's Environment"
+    issuer: United States Antarctic Program
+    date: 2006
+    tags: [space]
+    priority: 3
+  - name: General Employee Radiation Training (GERT)
+    issuer: Stanford Linear Accelerator Center
+    date: 2004
+    tags: [space]
+    priority: 2
+
+honours:
+  - name: Canadian Space Agency Astronaut Recruitment Campaign
+    detail: Advanced to the third round; top 100 of 5,000+ Canadian applicants
+    date: "2008–2009"
+    tags: [space, teaching, general]
+    priority: 1
+  - name: Antarctica Service Medal of the United States of America
+    detail: For service in Antarctica with the ANITA long-duration balloon campaign
+    date: 2011
+    tags: [space, general]
+    priority: 1
+
+# kind: journal | proceedings | preprint | internal | press
+# Author lists are abbreviated "et al." as on the old website.
+publications:
+  - title: Characteristics of Four Upward-Pointing Cosmic-Ray-like Events Observed with ANITA
+    authors: P. W. Gorham et al.
+    venue: Phys. Rev. Lett. 117, 071101
+    date: 2016
+    kind: journal
+    tags: [ai-training, space]
+    priority: 1
+  - title: Observations of the Askaryan Effect in Ice
+    authors: P. W. Gorham et al.
+    venue: Phys. Rev. Lett. 99, 171101
+    date: 2007
+    kind: journal
+    tags: [ai-training, space, teaching]
+    priority: 1
+  - title: Observations of Microwave Continuum Emission from Air Shower Plasmas
+    authors: P. W. Gorham et al.
+    venue: arXiv:0705.2589
+    date: 2007
+    kind: preprint
+    tags: [ai-training, space]
+    priority: 2
+  - title: Observations of the Askaryan Effect using the ANITA Balloon Instrument
+    authors: R. J. Kowalski et al.
+    venue: Proceedings of the 30th International Cosmic Ray Conference
+    date: 2007
+    kind: proceedings
+    tags: [ai-training, space, teaching]
+    priority: 1
+  - title: "ANITA: Searching for UHE Neutrinos in Antarctic Ice"
+    authors: R. J. Kowalski et al.
+    venue: Proceedings of the 22nd Lake Louise Winter Institute
+    date: 2007
+    kind: proceedings
+    tags: [ai-training, space]
+    priority: 2
+  - title: Detection of Ultra High Energy Neutrinos via Coherent Radio Emission
+    authors: G. S. Varner et al.
+    venue: SLAC-PUB-11872
+    date: 2006
+    kind: preprint
+    tags: [space]
+    priority: 2
+  - title: "ANITA Note #143: Flight Hardware Configuration"
+    authors: R. J. Kowalski
+    venue: internal
+    date: 2006
+    kind: internal
+    tags: [space]
+    priority: 3
+  - title: "ANITA Note #109: Antarctic Assembly Procedure and Task List"
+    authors: R. J. Kowalski et al.
+    venue: internal
+    date: 2006
+    kind: internal
+    tags: [space]
+    priority: 3
+  - title: "ANITA Flight Firmware: Interface Definitions and Functional Descriptions"
+    authors: G. S. Varner et al.
+    venue: internal
+    date: 2006
+    kind: internal
+    tags: [space]
+    priority: 3
+  # Photo credits in print media
+  - title: The Honolulu Advertiser (s.t.e.m.), p. 21
+    url: http://the.honoluluadvertiser.com/article/2008/Mar/26
+    date: 2008-03-26
+    kind: press
+    tags: [space, teaching]
+    priority: 3
+  - title: Nature 450, p. 322
+    url: http://www.nature.com/nature/journal/v450/n7168/full/450322a.html
+    date: 2007-11-15
+    kind: press
+    tags: [space, teaching]
+    priority: 3
+  - title: Seed Magazine, p. 84
+    url: http://seedmagazine.com/
+    date: 2007-11
+    kind: press
+    tags: [space, teaching]
+    priority: 3
+  - title: Mālamalama 32 (2), p. 6
+    url: http://www.hawaii.edu/malamalama/2007/05/researchnews.html
+    date: 2007-05
+    kind: press
+    tags: [space, teaching]
+    priority: 3
+  - title: The Antarctic Sun, p. 10
+    url: https://antarcticsun.usap.gov/pastIssues/2006-2007/2006_11_12.pdf
+    date: 2006-11-12
+    kind: press
+    tags: [space, teaching]
+    priority: 3
+
+leadership:
+  - text: >-
+      Designed and ran training for 25+ university orientation leaders for two
+      consecutive years; delivered orientation training to 200+ students.
+    tags: [teaching, pm]
+    priority: 2
+
+# ---------------------------------------------------------------------------
+# current: false → kept for history, hidden from the website skills page
+skills:
+  - group: Data Engineering
+    tags: [data-eng, ai-training, general]
+    items:
+      - {name: Python, current: true}
+      - {name: Databricks, current: true}
+      - {name: Pandas, current: true}
+      - {name: NumPy, current: true}
+      - {name: SciPy, current: true}
+      - {name: Apache Airflow, current: true}
+      - {name: FastAPI, current: true}
+      - {name: ETL / pipeline orchestration, current: true}
+      - {name: "Data versioning & lineage (DVC, Pachyderm)", current: true}
+      - {name: Bash, current: true}
+  - group: Medical Imaging & AI
+    tags: [data-eng, ai-training, general]
+    items:
+      - {name: DICOM & de-identification, current: true}
+      - {name: MONAI Label, current: true}
+      - {name: 3D Slicer, current: true}
+      - {name: Orthanc / OHIF, current: true}
+      - {name: Label Studio, current: true}
+      - {name: OCR (EasyOCR), current: true}
+      - {name: NLP (spaCy), current: true}
+  - group: Automation
+    tags: [data-eng]
+    items:
+      - {name: "Playwright (RPA, end-to-end web testing)", current: true}
+      - {name: Test automation frameworks, current: true}
+  - group: Databases
+    tags: [data-eng]
+    items:
+      - {name: MongoDB, current: true}
+      - {name: PostgreSQL, current: true}
+      - {name: MySQL, current: true}
+      - {name: SQLite, current: true}
+      - {name: SQLAlchemy, current: true}
+  - group: Cloud & DevOps
+    tags: [data-eng, pm, general]
+    items:
+      - {name: Docker / Podman, current: true}
+      - {name: "AWS (EC2, S3, RDS, IAM, Route 53)", current: true}
+      - {name: Azure, current: true}
+      - {name: GCP, current: true}
+      - {name: "Linux administration (Ubuntu, RHEL)", current: true}
+      - {name: GitHub / GitLab, current: true}
+      - {name: Jenkins CI, current: false}
+      - {name: Chef / OpsWorks, current: false}
+  - group: Visualization & Apps
+    tags: [data-eng]
+    items:
+      - {name: Streamlit, current: true}
+      - {name: Plotly / matplotlib / Seaborn, current: true}
+      - {name: Quarto, current: true}
+      - {name: Tableau / Power BI / Looker, current: true}
+      - {name: NiceGUI / Flask, current: true}
+      - {name: Pyramid / Phalcon / jQuery, current: false}
+  - group: Scientific & Hardware
+    tags: [space, ai-training]
+    items:
+      - {name: RF test & calibration, current: true}
+      - {name: "Spectrum / network analyzers, oscilloscopes", current: true}
+      - {name: Hardware/firmware systems integration, current: true}
+      - {name: Satellite comms (TDRSS) payload commanding, current: true}
+      - {name: Arduino / Raspberry Pi, current: true}
+      - {name: Soldering & cable assembly, current: true}
+      - {name: "Lab instrumentation (DMMs, integrating spheres, magnetometers, accelerometers, thermocouples)", current: true}
+      - {name: "ROOT, LaTeX, MATLAB", current: true}
+      - {name: "FORTRAN, C/C++, Java", current: true}
+  - group: Project & Product Management
+    tags: [pm]
+    items:
+      - {name: Agile / Scrum, current: true}
+      - {name: JIRA / Confluence, current: true}
+      - {name: Microsoft Project, current: true}
+      - {name: Budgeting & grant reporting, current: true}
+      - {name: SAP / SuccessFactors, current: true}
+      - {name: IP commercialization, current: true}
+
+interests:
+  - Space exploration
+  - SCUBA diving and water sports
+  - Hiking, backpacking, camping
+  - Guitar and drums
