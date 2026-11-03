@@ -123,9 +123,11 @@ experience:
         priority: 1
       - text: >-
           Built ReqIntake, an autonomous requisition-management system for Nova
-          Scotia Health that takes faxed paper requisitions, creates them in
-          OceanMD through Python/Playwright browser automation (RPA), and
-          delivers them downstream to the Novari system.
+          Scotia Health: an LLM, via the Instructor library, transcribes faxed
+          requisitions (typed and handwritten) into validated Pydantic
+          structured output, then Python/Playwright browser automation (RPA)
+          creates them in OceanMD and delivers them downstream to the Novari
+          system.
         note: "Optional: add volume (requisitions/month) or staff time saved"
         tags: [data-eng, pm, general]
         priority: 1
@@ -614,6 +616,7 @@ skills:
       - {name: Orthanc / OHIF, current: true}
       - {name: Label Studio, current: true}
       - {name: OCR (EasyOCR), current: true}
+      - {name: "LLM structured extraction (Instructor, Pydantic)", current: true}
       - {name: NLP (spaCy), current: true}
   - group: Automation
     tags: [data-eng]
