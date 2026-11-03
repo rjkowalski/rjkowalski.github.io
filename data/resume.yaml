@@ -144,6 +144,13 @@ experience:
         tags: [data-eng, ai-training, pm, general]
         priority: 1
       - text: >-
+          Built the data pipeline and set up the annotation system for a team
+          study testing whether an AI segmentation model's (SAM3) performance on
+          a clinical task can serve as an automated MRI quality metric
+          (co-author, ISMRM 2027 submission).
+        tags: [data-eng, ai-training, general]
+        priority: 2
+      - text: >-
           Engineer data pipelines, manage data catalogs, and build front-end
           applications on Databricks.
         tags: [data-eng]
@@ -451,9 +458,26 @@ honours:
     tags: [space, general]
     priority: 1
 
-# kind: journal | proceedings | preprint | internal | press
+# kind: journal | proceedings | submitted | preprint | internal | press
 # Author lists are abbreviated "et al." as on the old website.
+# submitted: venue reads "<Journal> (submitted)"; never put submission IDs here (public repo).
 publications:
+  - title: Radiologist-Guided Large Language Model for Automated Protocoling of Body MRI Requisitions
+    authors: A. Guida, J. M. Oxner, J. R. Kowalski, et al.
+    venue: European Radiology (submitted)
+    date: 2026-10
+    kind: submitted
+    note: "Full paper of the AIiH 2026 abstract; update venue/DOI on acceptance"
+    tags: [general]
+    priority: 1
+  - title: "Task Quality vs. Image Quality: Is AI’s Ability to Perform a Clinically Relevant Task a Surrogate Automated Quality Metric?"
+    authors: D. Ross, K. Crowell, …, R. J. Kowalski, et al.
+    venue: ISMRM & ISMRT Annual Meeting 2027, Vancouver (submitted)
+    date: 2026-11
+    kind: submitted
+    note: "Full list: D. Ross†, K. Crowell†, J. A. Rioux, C. Bowen, S. E. Clarke, R. J. Kowalski, A. Guida, S. D. Beyea (†equal). Update on acceptance."
+    tags: [general]
+    priority: 1
   - title: Radiologist-Guided LLM to Auto-Protocol MRI Body Imaging Requisitions
     authors: J. Oxner, A. Guida, J. Kowalski, et al.
     venue: International Conference on Artificial Intelligence in Healthcare (AIiH 2026), London; doi:10.5281/zenodo.21922025
