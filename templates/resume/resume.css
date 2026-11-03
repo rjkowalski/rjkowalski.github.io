@@ -41,3 +41,11 @@ li.draft { background: #fff3b0; }
 dl.skills { display: grid; grid-template-columns: max-content 1fr; gap: 1.5pt 8pt; margin: 0; }
 dl.skills dt { font-weight: 700; }
 dl.skills dd { margin: 0; }
+
+/* Cover letter */
+body.letter { font-size: 10.5pt; line-height: 1.42; }
+body.letter header { margin-bottom: 16pt; }
+body.letter p { margin: 0 0 9pt; }
+body.letter .date { margin-bottom: 12pt; }
+body.letter .recipient { margin-bottom: 14pt; }
+body.letter .signoff { margin-top: 14pt; }

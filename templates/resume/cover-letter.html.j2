@@ -1,0 +1,25 @@
+{#- One-page cover letter. build.py passes r (basics + headline), job, today. -#}
+{% set letter = job.cover_letter %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{{ r.basics.name }} — Cover Letter ({{ job.company }}, {{ job.role }})</title>
+<style>{{ css | safe }}</style>
+</head>
+<body class="letter">
+
+{% include "resume/_header.html.j2" %}
+
+<p class="date">{{ today }}</p>
+<p class="recipient">{{ job.company }} hiring team<br>Re: {{ job.role }}</p>
+
+<p>{{ letter.greeting }}</p>
+{% for p in letter.paragraphs %}
+<p>{{ p }}</p>
+{% endfor %}
+
+<p class="signoff">Sincerely,<br><br>{{ r.basics.name }}</p>
+
+</body>
+</html>

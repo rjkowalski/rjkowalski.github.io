@@ -6,6 +6,7 @@
     uv run build.py --lane all         # every lane
     uv run build.py --lane pm --long   # include priority-3 items, any length
     uv run build.py --lane space --drafts   # preview with draft items shown
+    uv run build.py --job applications/acme/*.yaml   # tailored resume + cover letter per job
 
 Filtering rules (see the header of resume.yaml):
   - status: draft items are hidden unless --drafts
@@ -14,6 +15,16 @@ Filtering rules (see the header of resume.yaml):
     items without tags inherit their parent's visibility
   - priority (default 1) must be <= the max priority for the output
   - note: fields are never rendered
+
+Job files (applications/<company>/<role>.yaml, git-ignored) start from a lane and
+override what that one application needs:
+  lane, pages          base lane and page limit (default 2)
+  headline, summary    replace the lane's
+  sections             replace LANE_SECTIONS[lane]
+  experience: {id: {bullets: [...]} | {hide: true}}   reworded/reordered bullets
+  skills: {group: [items]}                            replaces the skills block
+  publications: [titles]                              exact titles from resume.yaml, in order
+  role, cover_letter: {greeting, paragraphs: [...]}   one-page letter
 """
 
 from __future__ import annotations
@@ -34,6 +45,7 @@ ROOT = Path(__file__).parent
 DATA = ROOT / "data"
 TEMPLATES = ROOT / "templates"
 OUT = ROOT / "out"
+APPLICATIONS = ROOT / "applications"
 
 SITE_PAGES = ["index", "about", "skills", "experience", "education", "contact"]
 LANES = ["general", "data-eng", "ai-training", "space", "pm", "teaching"]
@@ -130,6 +142,38 @@ def tailor(data: dict, lane: str | None, max_priority: int, *, site: bool, draft
         ],
         "interests": data.get("interests", []),
     }
+
+
+def apply_job(r: dict, job: dict, data: dict) -> dict:
+    """Overlay one job application's tailoring onto a lane-filtered resume."""
+    r = {**r, **{k: job[k] for k in ("headline", "summary", "sections") if k in job}}
+    if "publications" in job:
+        by_title = {p["title"]: p for p in data["publications"]}
+        r["publications"] = [by_title[t] for t in job["publications"]]
+    over = job.get("experience", {})
+    r["experience"] = [
+        {**e, "bullets": [{"text": t} for t in over[e["id"]]["bullets"]]}
+        if "bullets" in over.get(e["id"], {}) else e
+        for e in r["experience"]
+        if not over.get(e["id"], {}).get("hide")
+    ]
+    if "skills" in job:
+        r["skills"] = [
+            {"group": g, "items": [{"name": s} for s in items]} for g, items in job["skills"].items()
+        ]
+    return r
+
+
+def validate_job(job: dict, data: dict, path: Path) -> None:
+    errors = []
+    if job.get("lane") not in LANES:
+        errors.append(f"lane must be one of {LANES}")
+    ids = {e["id"] for e in data["experience"]}
+    errors += [f"experience: unknown id {i!r}" for i in job.get("experience", {}) if i not in ids]
+    titles = {p["title"] for p in data["publications"]}
+    errors += [f"publications: unknown title {t!r}" for t in job.get("publications", []) if t not in titles]
+    if errors:
+        sys.exit(f"{path} problems:\n  " + "\n  ".join(errors))
 
 
 # --------------------------------------------------------------------------
@@ -233,6 +277,8 @@ def build_resume(
     max_pages: int = 2,
     site: bool = False,
     dest: Path | None = None,
+    job: dict | None = None,
+    stem: str | None = None,
 ) -> None:
     """Render one lane to HTML + PDF, picking the richest content that fits.
 
@@ -241,7 +287,7 @@ def build_resume(
     pages (unless max_pages=1). --long ignores length.
     """
     OUT.mkdir(exist_ok=True)
-    stem = f"resume-{lane}" + ("-long" if long else "")
+    stem = stem or f"resume-{lane}" + ("-long" if long else "")
     html_path = OUT / f"{stem}.html"
     pdf_path = dest or OUT / f"{stem}.pdf"
     template = env.get_template("resume/resume.html.j2")
@@ -256,6 +302,8 @@ def build_resume(
         r = tailor(data, lane, max_priority, site=site, drafts=drafts)
         r["sections"] = LANE_SECTIONS[lane]
         r["long"] = long
+        if job:
+            r = apply_job(r, job, data)
         html_path.write_text(template.render(r=r, css=css, drafts=drafts))
         pages = print_pdf(html_path, pdf_path)
         if pages <= limit:
@@ -265,9 +313,34 @@ def build_resume(
     print(f"  {pdf_path.relative_to(ROOT)}  ({pages} page{'s' * (pages > 1)}, priority <= {max_priority}){flag}")
 
 
+def build_job(env: Environment, data: dict, path: Path, *, drafts: bool) -> None:
+    """Tailored resume plus one-page cover letter for one job file."""
+    job = yaml.safe_load(path.read_text())
+    validate_job(job, data, path)
+    stem = f"{path.parent.name}-{path.stem}"
+    build_resume(env, data, job["lane"], long=False, drafts=drafts,
+                 max_pages=job.get("pages", 2), job=job, stem=f"{stem}-resume")
+    if "cover_letter" not in job:
+        return
+
+    html_path = OUT / f"{stem}-cover-letter.html"
+    pdf_path = OUT / f"{stem}-cover-letter.pdf"
+    css = (TEMPLATES / "resume" / "resume.css").read_text()
+    html_path.write_text(env.get_template("resume/cover-letter.html.j2").render(
+        r={"basics": data["basics"], "headline": job.get("headline", data["headlines"][job["lane"]])},
+        job=job,
+        today=dt.date.today().strftime("%B %-d, %Y"),
+        css=css,
+    ))
+    pages = print_pdf(html_path, pdf_path)
+    flag = "" if pages == 1 else "  <-- over 1 page; shorten the letter"
+    print(f"  {pdf_path.relative_to(ROOT)}  ({pages} page{'s' * (pages > 1)}){flag}")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--lane", choices=LANES + ["all"], help="build tailored resume PDF(s) instead of the site")
+    ap.add_argument("--job", nargs="+", type=Path, metavar="YAML", help="build a tailored resume + cover letter per job file")
     ap.add_argument("--long", action="store_true", help="include priority-3 items; no page limit")
     ap.add_argument("--pages", type=int, choices=[1, 2], default=2, help="page limit for tailored PDFs (default 2; one page is tried first)")
     ap.add_argument("--drafts", action="store_true", help="include status: draft items (preview only)")
@@ -277,6 +350,12 @@ def main() -> None:
     data = yaml.safe_load((DATA / "resume.yaml").read_text())
     validate(data)
     env = make_env()
+
+    if args.job:
+        OUT.mkdir(exist_ok=True)
+        for path in args.job:
+            build_job(env, data, path, drafts=args.drafts)
+        return
 
     if args.lane:
         for lane in LANES if args.lane == "all" else [args.lane]:

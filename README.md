@@ -9,7 +9,8 @@ Personal site and tailored resumes, all generated from one file: `data/resume.ya
 | `data/resume.yaml` | All resume content, tagged by lane and priority (rules in its header) |
 | `data/website.yaml` | Website-only copy and styling (About story, icons, timeline photos, socials) |
 | `templates/site/` | Jinja templates for the six site pages (theme: Samuel 2.2.0 in `assets/`) |
-| `templates/resume/` | The PDF resume template and its print CSS |
+| `templates/resume/` | The PDF resume and cover-letter templates and their print CSS |
+| `applications/` | Per-job tailoring and cover letters (git-ignored; keys in `build.py`'s docstring) |
 | `build.py` | The generator |
 
 ## Build
@@ -23,6 +24,7 @@ uv run build.py --lane all           # every lane into out/
 uv run build.py --lane pm --pages 1  # strict one page; reports overflow
 uv run build.py --lane ai-training --long    # include priority-3 items, any length
 uv run build.py --lane data-eng --drafts     # preview with draft bullets highlighted
+uv run build.py --job applications/acme/*.yaml   # out/acme-<role>-resume.pdf + -cover-letter.pdf
 ```
 
 Lanes: `general`, `data-eng`, `ai-training`, `space`, `pm`, `teaching`.

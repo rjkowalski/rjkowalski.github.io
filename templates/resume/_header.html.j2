@@ -1,0 +1,12 @@
+{#- Name, headline, and contact block shared by the resume and cover letter. -#}
+{% set b = r.basics %}
+<header>
+  <h1>{{ b.name }}</h1>
+  <p class="headline">{{ r.headline }}</p>
+  <p class="contact">
+    {{ b.location }} · {{ b.phone }} · <a href="mailto:{{ b.email }}">{{ b.email }}</a><br>
+    <a href="{{ b.profiles.linkedin }}">{{ b.profiles.linkedin | replace("https://www.", "") }}</a> ·
+    <a href="{{ b.profiles.github }}">{{ b.profiles.github | replace("https://", "") }}</a> ·
+    <a href="{{ b.website }}">{{ b.website | replace("https://", "") }}</a>
+  </p>
+</header>
